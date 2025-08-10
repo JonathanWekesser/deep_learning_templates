@@ -14,7 +14,7 @@ Each folder contains a `README.md` explaining its purpose and usage.
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/deep_learning_templates.git
+git clone https://github.com/JonathanWekesser/deep_learning_templates
 cd deep_learning_templates
 ```
 

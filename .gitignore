@@ -1,8 +1,0 @@
-/Xdestination-requirements.txt
-/Xdocker-compose.base.yml
-/Xdocker-compose.tf.amd.yml
-/Xdocker-compose.tf.nvidia.yml
-/Xtf.Dockerfile
-/Xtf.amd.Dockerfile
-/Xtf.nvidia.Dockerfile
-/Xtorch.Dockerfile
