@@ -1,0 +1,10 @@
+services:
+  jupyter:
+    ports:
+        - "8888:8888"
+        - "9922:22"
+    volumes:
+        - ./models:/workspace/models
+        - ./notebooks:/workspace/notebooks
+        - ./data:/workspace/data
+    command: "jupyter lab --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token=''"
