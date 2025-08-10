@@ -3,28 +3,31 @@
 This repository provides ready-to-use templates for common deep learning tasks using TensorFlow or PyTorch.  
 The goal is to offer an easy-to-start development environment, mainly via Docker Compose, to minimize setup effort.
 
-## 📁 Project Structure
+## 📂 Overview
 
-TODO: structure plan ... 
-
-Each folder contains a `README.md` explaining its purpose and usage.
+The project includes folders for data, models, and notebooks, each with its own README explaining usage.  
+Docker Compose files provide pre-configured environments for different frameworks and hardware setups.
 
 ## 🚀 Getting Started
 
-1. **Clone the repository:**
+1. **Install Docker**
+
+    Please follow this tutorial: https://docs.docker.com/engine/install/
+
+2. **Clone the repository:**
 
 ```bash
 git clone https://github.com/JonathanWekesser/deep_learning_templates
 cd deep_learning_templates
 ```
 
-2. **Start a Docker container:** \
+3. **Start a Docker container:** \
 Example: TensorFlow CPU
 ```bash
 docker-compose -f docker.compose.tf.cpu.yml up
 ``` 
 
-3. **Open Jupyter Lab:**
+4. **Open Jupyter Lab:**
 
 Open your browser and go to http://localhost:8888.
 The notebooks folder is mounted inside the container and ready to use.
