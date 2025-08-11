@@ -35,15 +35,19 @@ The notebooks folder is mounted inside the container and ready to use.
 ## 📚 Folder Descriptions
 - `data/` \
     Contains datasets used in the notebooks and models. \
-    See `data/README.md` for details.
+    See [`data/README.md`](data/README.md) for details.
 
 - `models/` \
     Stores trained model files. \
-    See `models/README.md` for details.
+    See [`models/README.md`](models/README.md) for details.
 
 - `notebooks/` \
     Contains Jupyter notebooks for various deep learning tasks. \
-    See `notebooks/README.md` for details.
+    See [`notebooks/README.md`](notebooks/README.md) for details.
+
+- `src/` \
+    Contains Python scripts and helper utilities for the project. \
+    See [`src/README.md`](src/README.md) for details.
 
 ## 🔧 Optional Local Setup
 If you prefer to run notebooks locally without Docker (what is not recommended), you can install dependencies with:

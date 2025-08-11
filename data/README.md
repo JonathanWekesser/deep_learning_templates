@@ -10,4 +10,4 @@ This folder stores datasets used by the notebooks and models.
     - cifar10/
     - imdb/
 
-> Tip: Avoid committing large datasets to Git; add them to `.gitignore`.
+> **Tip**: Avoid committing large datasets to Git; add them to `.gitignore`.

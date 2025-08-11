@@ -1,6 +1,6 @@
 # 📂 notebooks/
 
-All Jupyter notebooks are stored here.
+All Jupyter notebooks are stored here.  
 
 - Each task or experiment has its own `.ipynb` file.
 - Notebooks typically load data from `../data/` and save/load models from `../models/`.
@@ -12,5 +12,5 @@ Example structure:
 - text_classification_imdb.ipynb
 - time_series_forecasting.ipynb
 
-> Recommendation: Use clear, descriptive file names like `framework_task_dataset.ipynb`  
+> **Recommendation**: Use clear, descriptive file names like `framework_task_dataset.ipynb`  
 > (e.g., `torch_image_mnist.ipynb`).
