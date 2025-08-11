@@ -1,0 +1,12 @@
+services:
+  jupyter:
+    container_name: torch_amd_gpu
+    extends:
+      service: jupyter
+      file: docker-compose.base.yml
+    build: 
+      context: .
+      dockerfile: torch.amd.dockerfile
+    devices: 
+      - /dev/kfd
+      - /dev/dri
