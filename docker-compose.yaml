@@ -1,0 +1,42 @@
+services:
+  dl:
+    build:
+      context: .
+      args:
+        USE_CUDA: ${USE_CUDA:-OFF}
+        USE_ROCM: ${USE_ROCM:-OFF}
+    image: dl-multi-framework
+    volumes:
+      - ./:/workspace
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_TOKEN=mysecrettoken
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles: ["all"]
+
+  dl-cpu:
+    extends: dl
+    profiles: ["cpu"]
+    deploy: {}
+
+  dl-nvidia:
+    extends: dl
+    profiles: ["nvidia"]
+    environment:
+      - USE_CUDA=ON
+
+  dl-amd:
+    extends: dl
+    profiles: ["amd"]
+    environment:
+      - USE_ROCM=ON
+    devices:
+      - "/dev/kfd"
+      - "/dev/dri"

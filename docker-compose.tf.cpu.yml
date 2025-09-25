@@ -1,9 +1,0 @@
-services:
-  jupyter:
-    container_name: tf_cpu
-    extends:
-      service: jupyter
-      file: docker-compose.base.yml
-    build: 
-      context: .
-      dockerfile: tf.cpu.dockerfile
