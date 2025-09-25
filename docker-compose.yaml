@@ -7,7 +7,10 @@ services:
         USE_ROCM: ${USE_ROCM:-OFF}
     image: dl-multi-framework
     volumes:
-      - ./:/workspace
+      - ./data:/workspace/data
+      - ./models:/workspace/models
+      - ./notebooks:/workspace/notebooks
+      - ./src:/workspace/src
     ports:
       - "8888:8888"
     deploy:
