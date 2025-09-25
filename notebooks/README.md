@@ -8,9 +8,9 @@ All Jupyter notebooks are stored here.
 
 Example structure:
 - notebooks/
-- image_classification_mnist.ipynb
-- text_classification_imdb.ipynb
-- time_series_forecasting.ipynb
+  - image_classification_mnist.ipynb
+  - text_classification_imdb.ipynb
+  - time_series_forecasting.ipynb
 
 > **Recommendation**: Use clear, descriptive file names like `framework_task_dataset.ipynb`  
 > (e.g., `torch_image_mnist.ipynb`).
