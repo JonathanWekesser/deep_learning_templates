@@ -25,10 +25,26 @@ You can also place your own scripts here.
     ```bash
     python src/gpu_benchmark.py
     ```
+    
+    <details><summary><b>Example Output</b></summary>
+   
+        === TensorFlow ===
+        TensorFlow v 2.20.0
+        Num GPUs Available: 1
+        GPU(s): [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+        CPU (s): 11.6321
+        GPU (s): 1.3846
+        Speedup: 8.4x
 
-**Example Output**
-
-TODO: Example Output
+        === PyTorch ===
+        PyTorch v 2.8.0+cu128
+        CUDA available: True
+        Num GPUs: 1
+        Current GPU: Quadro T2000
+        CPU (s): 10.0154
+        GPU (s): 0.0041
+        Speedup: 2460.7x
+    </details>
 
 > **Tips:**
 > - If the script reports GPU device not found, make sure you are running the GPU-enabled version of the container.
