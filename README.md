@@ -58,17 +58,43 @@ The Docker Compose file provide pre-configured environments for different hardwa
 
 ## PyCharm Setup
 
+![PyCharm Icon](docs/pycharm_icon.png)
+
 If you don't want to use Jupyter in a web interface, you also can set up the Python-Interpreter of PyCharm to the docker container.
 
 1. You have installed PyCharm. 
+2. The remote interpreter is a Pro feature. To access it you either have your [free one-month Pro trial](https://www.jetbrains.com/pycharm/download/) running or you can apply for an [educational subscription](https://www.jetbrains.com/academy/student-pack/) which grants you free access JetBrains IDEs for the full duration of your studies. (This is just filling out a form, so don't worry...) 
+3. Open the project in PyCharm (or clone it directly with PyCharm). 
+4. When it asks you about the environment, you have to decide whether you want to run it locally or in the container.
+   1. (*Recommended*) You want it to run inside the container: Skip this step and press \[Cancel\]. 
+   2. You want it locally: Create your environment with \[OK\]. (You can now ignore the next steps)
+   ![Creating Virtual Environment](docs/create_virtual_environment.png)
+5. After skipping the environment setup you should see a field \[\<No interpreter\>\] in the lower right corner.
+    ![No interpreter](docs/no_interpreter.png)
+6. Click on \[\<No interpreter\>\] and select \[Add New Interpreter\] to manually set up your interpreter to Docker. 
+    Now that we have a Docker Compose environment click on \[On Docker Compose...\].
 
-2. Unfortunality to use a remote interpreter is a Pro feature. To access it you either have your [free one-month Pro trial](https://www.jetbrains.com/pycharm/download/) running or you can apply for an [educational subscription](https://www.jetbrains.com/academy/student-pack/) which grants you free access JetBrains IDEs for the full duration of your studies. (This is just filling out a form, so don't worry...) 
+    ![interpreter selection](docs/select_interpreter_type.png)
+7. Create a new Docker Compose target.
+   1. Select your Server (in the vast majority of cases \[Docker\]).
+   2. Select the configuration file. This has to be './docker-compose.yaml'. 
+   3. Select your Service: This depends on your system and preference. You can choose between:
+      1. CPU-Version: \[dl-cpu\]
+      2. Nvidia-GPU-Version: \[dl-nvidia\]
+      3. AMD-GPU-Version: \[dl-amd\]
+   4. You can select a custom Project name, but don't have to.
+   5. There is no need for any Environment variables. 
+   
+   ![Create new Docker Compose target](docs/create_new_docker_compose_target.png)
+8. Create and configure new target. 
+   The prerequisite for this step is, that you have run the build script with the configuration you chose before. 
+   This screen can load a little bit, so make sure you fulfilled the previous steps.
+   ![Create and configure new target](docs/create_and_configure_a_new_target.png)
+9. Now you can set the interpreter. Select the \[System interpreter\] (which is the system interpreter inside the container now) and use the preselected. 
+   ![Select interpreter](docs/project_directory_and_language_runtime_configuration.png)
+10. 
+    
 
-3. Open the project in PyCharm. 
-
-4. (TODO) Set the 'python interpreter' to the docker container. 
-
-5. (TODO) Set the jupyter server to localhost (not self hosted). 
 
 
 ## Nvidia Container Toolkit
