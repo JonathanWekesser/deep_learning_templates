@@ -1,0 +1,30 @@
+# Jupyter
+jupyter
+jupyterlab
+
+# PyTorch
+torch
+torchtune
+torchvision
+torchao
+torchtext
+
+# LLM
+transformers
+sentence-transformers
+huggingface-hub
+adapters
+datasets
+peft
+evaluate
+trl
+tokenizers
+sentencepiece
+tqdm
+
+# General
+numpy
+pandas
+matplotlib
+
+scikit-learn

@@ -1,0 +1,30 @@
+# Jupyter
+jupyter
+jupyterlab
+
+# TensorFlow
+# tensorflow # should be preinstalled in container
+# tensorflow-metal # only Apple-Silicon (M1 ...)
+tensorflow_datasets
+keras
+keras-nlp
+
+# LLM
+transformers
+sentence-transformers
+huggingface-hub
+adapters
+datasets
+peft
+evaluate
+trl
+tokenizers
+sentencepiece
+tqdm
+
+# General
+numpy
+pandas
+matplotlib
+
+scikit-learn
