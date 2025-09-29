@@ -1,11 +1,11 @@
-# Jupyter
-jupyter
+# Jupyter / Tools
 jupyterlab
+tqdm
 
 # PyTorch
 torch
 torchtune
-torchvision
+torchvision 
 torchao
 torchtext
 

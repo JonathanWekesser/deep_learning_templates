@@ -1,10 +1,11 @@
-# Jupyter
+# Jupyter / Tools
 jupyter
 jupyterlab
+tqdm
 
 # TensorFlow
-tensorflow
-# tensorflow-metal # only Apple-Silicon (M1 ...)
+tensorflow          # when you use Apple-Silicon (M1 ...), comment this line
+# tensorflow-metal  # only Apple-Silicon (M1 ...)          and uncomment this line 
 tensorflow_datasets
 keras
 keras-nlp
@@ -27,7 +28,6 @@ evaluate
 trl
 tokenizers
 sentencepiece
-tqdm
 
 # General
 numpy
