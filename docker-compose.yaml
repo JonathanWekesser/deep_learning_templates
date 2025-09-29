@@ -1,43 +1,52 @@
+# ===== Common blocks =====
+x-common-build: &common_build
+  context: .
+
+x-common-volumes: &common_volumes
+  volumes:
+    - ./data:/workspace/data
+    - ./models:/workspace/models
+    - ./notebooks:/workspace/notebooks
+    - ./src:/workspace/src
+
+x-common-ports-tf: &common_ports_tf
+  ports:
+    - "${JUPYTER_PORT_TF:-8888}:8888"
+
+x-common-ports-torch: &common_ports_torch
+  ports:
+    - "${JUPYTER_PORT_TORCH:-8889}:8888"
+
+x-cuda-devices: &cuda_devices
+  gpus: all
+
+x-rocm-devices: &rocm_devices
+  devices:
+    - "/dev/kfd"
+    - "/dev/dri"
+  group_add:
+    - "video"
+  security_opt:
+    - "seccomp=unconfined"
+
+# ===== Services =====
 services:
-  dl:
+  tf-cpu:
     build:
-      context: .
+      <<: *common_build
       args:
-        USE_CUDA: ${USE_CUDA:-OFF}
-        USE_ROCM: ${USE_ROCM:-OFF}
-    image: dl-multi-framework
-    volumes:
-      - ./data:/workspace/data
-      - ./models:/workspace/models
-      - ./notebooks:/workspace/notebooks
-      - ./src:/workspace/src
-    ports:
-      - "8888:8888"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-    profiles: ["all"]
-
-  dl-cpu:
-    extends: dl
+        - IMAGE=tensorflow/tensorflow:2.17.0-jupyter
+        - REQ=requirements/tf-req.txt
+    image: "${IMAGE_BASENAME:-dl-multi-framework}:tensorflow"
+    <<: [*common_volumes, *common_ports_tf]
     profiles: ["cpu"]
-    deploy: {}
 
-  dl-nvidia:
-    extends: dl
-    profiles: ["nvidia"]
-    environment:
-      - USE_CUDA=ON
-
-  dl-amd:
-    extends: dl
-    profiles: ["amd"]
-    environment:
-      - USE_ROCM=ON
-    devices:
-      - "/dev/kfd"
-      - "/dev/dri"
+  torch-cpu:
+    build:
+      <<: *common_build
+      args:
+        - IMAGE=intel/intel-extension-for-pytorch:2.8.0-pip-jupyter
+        - REQ=requirements/torch-req.txt
+    image: "${IMAGE_BASENAME:-dl-multi-framework}:pytorch"
+    <<: [*common_volumes, *common_ports_torch]
+    profiles: ["cpu"]
