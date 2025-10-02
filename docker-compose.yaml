@@ -1,7 +1,4 @@
 # ===== Common blocks =====
-x-common-build: &common_build
-  context: .
-
 x-common-volumes: &common_volumes
   volumes:
     - ./data:/workspace/data
@@ -18,7 +15,13 @@ x-common-ports-torch: &common_ports_torch
     - "${JUPYTER_PORT_TORCH:-8889}:8888"
 
 x-cuda-devices: &cuda_devices
-  gpus: all
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: ["gpu"]
 
 x-rocm-devices: &rocm_devices
   devices:
@@ -47,7 +50,21 @@ services:
     <<: [*common_volumes, *common_ports_torch]
     profiles: ["cpu"]
 
+  tf-nvidia:
+    build:
+      context: ./docker
+      dockerfile: tf-cuda.Dockerfile
+    image: "${IMAGE_BASENAME:-dl-multi-framework}:tensorflow-cuda"
+    <<: [*common_volumes, *common_ports_tf, *cuda_devices]
+    profiles: ["nvidia"]
 
+  torch-nvidia:
+    build:
+      context: ./docker
+      dockerfile: torch-cuda.Dockerfile
+    image: "${IMAGE_BASENAME:-dl-multi-framework}:pytorch-cuda"
+    <<: [*common_volumes, *common_ports_torch, *cuda_devices]
+    profiles: ["nvidia"]
 
   tf-amd:
     build:
