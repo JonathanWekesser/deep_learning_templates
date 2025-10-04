@@ -1,120 +1,235 @@
 # Deep Learning Templates
 
-This repository provides ready-to-use templates for common deep learning tasks with TensorFlow and PyTorch.
-The aim is to minimize setup effort by offering a reproducible development environment through Docker Compose.
-Predefined profiles let you run the same code on CPU, NVIDIA GPUs (CUDA), or AMD GPUs (ROCm), making it easy to adapt to the hardware you have available.
+![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-supported-orange?logo=tensorflow)
+![PyTorch](https://img.shields.io/badge/PyTorch-supported-red?logo=pytorch)
+![Jupyter](https://img.shields.io/badge/Jupyter-Lab-orange?logo=jupyter)
+![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11-blue?logo=python)
+![CUDA](https://img.shields.io/badge/CUDA-supported-green?logo=nvidia)
+![ROCm](https://img.shields.io/badge/ROCm-supported-red?logo=amd)
+
+This repository provides ready-to-use templates for common deep learning tasks using **TensorFlow** and **PyTorch**.
+
+Its goal is to **minimize setup effort** and ensure a **reproducible, hardware-agnostic environment** through Docker Compose.  
+You can easily switch between **CPU**, **NVIDIA GPU (CUDA)**, or **AMD GPU (ROCm)** setups with a single command.
 
 
-## 📂 Overview
+## ⚡ Quickstart
 
-The project includes folders for data, models, and notebooks, each with its own README explaining usage.  
-The Docker Compose file provide pre-configured environments for different hardware setups. 
+```bash
+git clone https://github.com/JonathanWekesser/deep_learning_templates
+cd deep_learning_templates
+
+# Build and start the container
+./build cpu       # or: nvidia / amd
+./run cpu
+```
+
+Then open [http://localhost:8888](http://localhost:8888) (TensorFlow) or [http://localhost:8889](http://localhost:8889) (PyTorch) in your browser.
 
 
-## 📚 Folder Descriptions
+## 📂 Project Overview
 
-- `data/` \
-    Contains datasets used in the notebooks and models. \
-    See [`data/README.md`](data/README.md) for details.
+The repository is structured to support clean organization of data, models, notebooks, and scripts.  
+Each folder contains its own `README.md` explaining its purpose and usage.
 
-- `models/` \
-    Stores trained model files. \
-    See [`models/README.md`](models/README.md) for details.
+### Folder Descriptions
 
-- `notebooks/` \
-    Contains Jupyter notebooks for various deep learning tasks. \
-    See [`notebooks/README.md`](notebooks/README.md) for details.
-    
-- `src/` \
-    Contains Python scripts and helper utilities for the project. \
-    See [`src/README.md`](src/README.md) for details.
+- `data/`  
+  Contains datasets used in the notebooks and models.  
+  See [`data/README.md`](data/README.md) for details.
+
+- `models/`  
+  Stores trained model files.  
+  See [`models/README.md`](models/README.md) for details.
+
+- `notebooks/`  
+  Contains Jupyter notebooks for various deep learning tasks.  
+  See [`notebooks/README.md`](notebooks/README.md) for details.
+
+- `src/`  
+  Contains Python scripts and helper utilities for experiments and benchmarking.  
+  See [`src/README.md`](src/README.md) for details.
+
+
+## 🧱 Containers and Profiles
+
+The project includes separate containers for each framework and hardware configuration.  
+Each container is defined in the Docker Compose setup and can be started independently.
+
+| Hardware              | TensorFlow  | PyTorch        |
+|-----------------------|-------------|----------------|
+| **CPU**               | `tf-cpu`    | `torch-cpu`    |
+| **NVIDIA GPU (CUDA)** | `tf-nvidia` | `torch-nvidia` |
+| **AMD GPU (ROCm)**    | `tf-amd`    | `torch-amd`    |
+
+### Docker Compose Profiles
+
+You can also use profiles directly with Docker Compose:
+
+| Profile  | Starts                      |
+|----------|-----------------------------|
+| `cpu`    | `tf-cpu`, `torch-cpu`       |
+| `nvidia` | `tf-nvidia`, `torch-nvidia` |
+| `amd`    | `tf-amd`, `torch-amd`       |
+
+Example:
+```bash
+# only tf container (CPU)
+docker compose --profile cpu up tf-cpu
+
+# only torch (CPU)
+docker compose --profile cpu up torch-cpu
+
+# both (CPU)
+docker compose --profile cpu up
+```
+
+### Helper Scripts
+To simplify working with containers, several Bash scripts are included in the project root.
+All scripts take a profile as argument (cpu, nvidia or amd).
+
+| Script    | Description                                                 |
+|-----------|-------------------------------------------------------------|
+| `./build` | Builds all required Docker images for a given profile.      |
+| `./run`   | Starts the corresponding container and exposes Jupyter Lab. |
+| `./stop`  | Stops all running containers for the current project.       |
+
+> 💡 The scripts automatically detect the correct container names and Docker Compose profiles, 
+> so you don’t need to remember or type long Docker commands manually.
 
 
 ## 🚀 Getting Started
 
-1. **Install Docker** \
-    Please follow this tutorial: https://docs.docker.com/engine/install/
+1. **Install Docker**  
+   Follow the official [Docker installation guide](https://docs.docker.com/engine/install/).
 
-2. **Clone the repository:**
-    ```bash
-    git clone https://github.com/JonathanWekesser/deep_learning_templates
-    cd deep_learning_templates
-    ```
+2. **Clone the repository**
+   ```bash
+   git clone https://github.com/JonathanWekesser/deep_learning_templates
+   cd deep_learning_templates
+   ```
 
-3. **Start a Docker container:** \
-    To start a container you have to build it first.
-    ```bash
+3. **Build the container**
+   ```bash
    ./build [cpu|nvidia|amd]
-    ```
-    After the container is built, you can start it.
-    ```bash
-   ./start [cpu|nvidia|amd]
-    ```
+   ```
 
-4. **Check environment** \
-    Now you can test, if your setup is working. The Jupyter Lab should work out of the box in your browser. \
-    Open http://localhost:8888 and start the `gpu_benchmark.py` script to check your GPU support. 
+4. **Run the container**
+   ```bash
+   ./run [cpu|nvidia|amd]
+   ```
 
+5. **Verify the environment**  
+   The Jupyter Lab instance should open in your browser at  
+   [http://localhost:8888](http://localhost:8888) (TensorFlow) or  
+   [http://localhost:8889](http://localhost:8889) (PyTorch).
 
-## PyCharm Setup
+   You can test GPU availability using:
+   ```bash
+   docker compose exec tf-nvidia python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+   docker compose exec torch-nvidia python -c "import torch; print(torch.cuda.is_available())"
+   ```
 
-![PyCharm Icon](docs/pycharm_icon.png)
-
-If you don't want to use Jupyter in a web interface, you also can set up the Python-Interpreter of PyCharm to the docker container.
-
-1. You have installed PyCharm. 
-2. The remote interpreter is a Pro feature. To access it you either have your [free one-month Pro trial](https://www.jetbrains.com/pycharm/download/) running or you can apply for an [educational subscription](https://www.jetbrains.com/academy/student-pack/) which grants you free access JetBrains IDEs for the full duration of your studies. (This is just filling out a form, so don't worry...) 
-3. Open the project in PyCharm (or clone it directly with PyCharm). 
-4. When it asks you about the environment, you have to decide whether you want to run it locally or in the container.
-   1. (*Recommended*) You want it to run inside the container: Skip this step and press \[Cancel\]. 
-   2. You want it locally: Create your environment with \[OK\]. (You can now ignore the next steps)
-   ![Creating Virtual Environment](docs/create_virtual_environment.png)
-5. After skipping the environment setup you should see a field \[\<No interpreter\>\] in the lower right corner.
-    ![No interpreter](docs/no_interpreter.png)
-6. Click on \[\<No interpreter\>\] and select \[Add New Interpreter\] to manually set up your interpreter to Docker. 
-    Now that we have a Docker Compose environment click on \[On Docker Compose...\].
-
-    ![interpreter selection](docs/select_interpreter_type.png)
-7. Create a new Docker Compose target.
-   1. Select your Server (in the vast majority of cases \[Docker\]).
-   2. Select the configuration file. This has to be './docker-compose.yaml'. 
-   3. Select your Service: This depends on your system and preference. You can choose between:
-      1. CPU-Version: \[dl-cpu\]
-      2. Nvidia-GPU-Version: \[dl-nvidia\]
-      3. AMD-GPU-Version: \[dl-amd\]
-   4. You can select a custom Project name, but don't have to.
-   5. There is no need for any Environment variables. 
-   
-   ![Create new Docker Compose target](docs/create_new_docker_compose_target.png)
-8. Create and configure new target. 
-   The prerequisite for this step is, that you have run the build script with the configuration you chose before. 
-   This screen can load a little bit, so make sure you fulfilled the previous steps.
-   ![Create and configure new target](docs/create_and_configure_a_new_target.png)
-9. Now you can set the interpreter. Select the \[System interpreter\] (which is the system interpreter inside the container now) and use the preselected. 
-   ![Select interpreter](docs/project_directory_and_language_runtime_configuration.png)
-10. 
-    
+   Alternatively, open the example notebook [`showcase.ipynb`](notebooks/showcase.ipynb) or run `src/gpu_benchmark.py`.
 
 
+## 🧠 PyCharm Setup (Recommended)
 
-## Nvidia Container Toolkit
+If you prefer using **PyCharm** instead of the browser-based Jupyter interface,
+follow the detailed setup guide here:
 
-To get access to your Nvidia GPU inside a docker container, you have to install the [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html) on your host machine.  
-Please follow the steps described in the guide of Nvidia: [Installation Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#).
+👉 [View PyCharm Setup Guide](docs/PyCharm_Setup.md) in this repository. 
 
-*Note*: Do not forget the [configuration](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#configuration).
-
-
-## AMD ROCm 
-If you have an AMD GPU, you have to do some preparations. To do so, follow this [guide](https://github.com/ROCm/ROCm-docker/blob/master/quick-start.md). 
+![PyCharm Icon](docs/images/pycharm_icon.png)
 
 
-## 🔧 Optional: Local Setup
-If you prefer to run notebooks locally without Docker (which is not recommended), you can install dependencies with:
+## ⚙️ Environment Configuration
+
+You can customize environment variables in a `.env` file at the project root.
+
+Default values:
+```dotenv
+IMAGE_BASENAME=dl-multi-framework
+JUPYTER_PORT_TF=8888
+JUPYTER_PORT_TORCH=8889
+```
+
+You can override these values as needed, for example to change exposed ports or image names.
+
+### 🔒 Security (Jupyter Token)
+
+By default, Jupyter runs without a token for local development.
+If you want to protect your server, set a token via `.env`:
+
+```dotenv
+JUPYTER_TOKEN=your-secure-token
+```
+
+
+## 🧩 GPU Setup
+
+> **Note:** If GPU setup becomes too time-consuming or fails after multiple attempts, simply use the CPU containers — they work out of the box on all systems.
+
+### NVIDIA GPU (CUDA)
+
+To use your NVIDIA GPU inside a Docker container, install the  
+**[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html)**.
+
+Follow these steps:
+
+1. [Installation Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)
+2. [Configuration Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#configuration)
+
+After installation, verify your setup:
+```bash
+docker run --rm --gpus all nvidia/cuda:12.6.0-base nvidia-smi
+```
+Make sure the CUDA version matches the one on your system. 
+You can check your local CUDA version with:
+`nvidia-smi`
+
+### AMD GPU (ROCm)
+
+For AMD GPUs, follow the [ROCm Docker quick start guide](https://github.com/ROCm/ROCm-docker/blob/master/quick-start.md).  
+This is only supported on **Linux** (Windows users should use the CPU version).
+
+
+## 🧰 Local Setup (Optional)
+
+If you prefer running notebooks locally (not recommended for reproducibility), install dependencies with:
+
 ```bash
 pip install -r requirements.txt
 ```
 
+> Some features (e.g., GPU detection) may not work outside Docker.
 
----
-Created by Jonathan Wekesser - 2025
+
+## 🛠️ Troubleshooting
+
+- **NVIDIA GPU not visible in container**  
+  Check host: `nvidia-smi`. Then test container:  
+  `docker run --rm --gpus all nvidia/cuda:12.6.9-base nvidia-smi`
+
+- **AMD ROCm not working on Windows**  
+  ROCm is Linux-only → use the CPU profile on Windows.
+
+- **Port already in use (8888/8889)**  
+  Change ports in `.env`:
+  ```dotenv 
+    JUPYTER_PORT_TF=18888
+    JUPYTER_PORT_TORCH=18889
+  ```
+
+
+## 🧑‍💻 Contributing
+
+Contributions, ideas, or suggestions are very welcome!  
+Please feel free to open issues or pull requests on GitHub.
+
+
+## 🪪 License
+
+This project is licensed under the [MIT License](LICENSE).  
+© 2025 Jonathan Wekesser
