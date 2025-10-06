@@ -1,0 +1,20 @@
+{
+  "name": "DL Templates (Torch on NVIDIA/CUDA)",
+  "dockerComposeFile": ["${localWorkspaceFolder}/docker-compose.yaml"],
+  "service": "torch-nvidia",
+  "runServices": ["torch-nvidia"],
+  "workspaceFolder": "/workspace",
+  "updateRemoteUserUID": true,
+  "shutdownAction": "none",
+  "overrideCommand": false,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
