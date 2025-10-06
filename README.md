@@ -129,8 +129,7 @@ All scripts take a profile as argument (cpu, nvidia or amd).
 
    Alternatively, open the example notebook [`showcase.ipynb`](notebooks/showcase.ipynb) or run `src/gpu_benchmark.py`.
 
-
-## 🧠 PyCharm Setup (Recommended)
+## PyCharm Setup (Recommended)
 
 If you prefer using **PyCharm** instead of the browser-based Jupyter interface,
 follow the detailed setup guide here:
@@ -138,6 +137,15 @@ follow the detailed setup guide here:
 → View [PyCharm Setup Guide](docs/pycharm_setup.md) in this repository. 
 
 ![PyCharm Icon](docs/images/pycharm_icon.png)
+
+## VS Code Setup (Alternative)
+
+If you prefer using **Visual Studio Code**, you can also connect it directly to the Docker Compose environment.  
+This allows you to develop, debug, and run notebooks inside the same containerized setup (similar to [PyCharm](#-pycharm-setup-recommended)).
+
+→ View [VS Code Setup Guide](docs/vscode_setup.md) in this repository. 
+
+![VS Code Icon](docs/images/vscode_icon.png)
 
 ## Environment Configuration
 
