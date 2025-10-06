@@ -14,4 +14,5 @@ RUN python -m pip install --upgrade pip setuptools wheel && pip install \
     keras --no-deps \
     keras-nlp --no-deps
     
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
+ENV JUPYTER_TOKEN=""
+CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token="${JUPYTER_TOKEN}"
