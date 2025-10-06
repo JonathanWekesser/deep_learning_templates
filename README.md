@@ -139,7 +139,7 @@ All scripts take a profile as argument (cpu, nvidia or amd).
 If you prefer using **PyCharm** instead of the browser-based Jupyter interface,
 follow the detailed setup guide here:
 
-👉 [View PyCharm Setup Guide](docs/PyCharm_Setup.md) in this repository. 
+👉 [View PyCharm Setup Guide](docs/pycharm_setup.md) in this repository. 
 
 ![PyCharm Icon](docs/images/pycharm_icon.png)
 
