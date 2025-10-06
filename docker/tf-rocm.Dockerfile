@@ -13,4 +13,5 @@ RUN python -m pip install --upgrade pip setuptools wheel && pip install \
     tf-keras==2.17.* 
 # RUN pip install --no-deps "keras-nlp==0.11.*"
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
+ENV JUPYTER_TOKEN=""
+CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token="${JUPYTER_TOKEN}"

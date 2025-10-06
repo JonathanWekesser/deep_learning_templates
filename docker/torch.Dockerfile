@@ -15,4 +15,5 @@ RUN pip install --no-cache-dir --upgrade pip && \
       torch torchvision torchao torchtext && \
     pip install --no-cache-dir torchtune
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
+ENV JUPYTER_TOKEN=""
+CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token="${JUPYTER_TOKEN}"
