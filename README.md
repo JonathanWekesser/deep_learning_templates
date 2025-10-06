@@ -13,8 +13,7 @@ This repository provides ready-to-use templates for common deep learning tasks u
 Its goal is to **minimize setup effort** and ensure a **reproducible, hardware-agnostic environment** through Docker Compose.  
 You can easily switch between **CPU**, **NVIDIA GPU (CUDA)**, or **AMD GPU (ROCm)** setups with a single command.
 
-
-## ⚡ Quickstart
+## Quickstart
 
 ```bash
 git clone https://github.com/JonathanWekesser/deep_learning_templates
@@ -27,8 +26,7 @@ cd deep_learning_templates
 
 Then open [http://localhost:8888](http://localhost:8888) (TensorFlow) or [http://localhost:8889](http://localhost:8889) (PyTorch) in your browser.
 
-
-## 📂 Project Overview
+## Project Overview
 
 The repository is structured to support clean organization of data, models, notebooks, and scripts.  
 Each folder contains its own `README.md` explaining its purpose and usage.
@@ -51,8 +49,7 @@ Each folder contains its own `README.md` explaining its purpose and usage.
   Contains Python scripts and helper utilities for experiments and benchmarking.  
   See [`src/README.md`](src/README.md) for details.
 
-
-## 🧱 Containers and Profiles
+## Containers and Profiles
 
 The project includes separate containers for each framework and hardware configuration.  
 Each container is defined in the Docker Compose setup and can be started independently.
@@ -95,11 +92,10 @@ All scripts take a profile as argument (cpu, nvidia or amd).
 | `./run`   | Starts the corresponding container and exposes Jupyter Lab. |
 | `./stop`  | Stops all running containers for the current project.       |
 
-> 💡 The scripts automatically detect the correct container names and Docker Compose profiles, 
+> Tip: The scripts automatically detect the correct container names and Docker Compose profiles, 
 > so you don’t need to remember or type long Docker commands manually.
 
-
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install Docker**  
    Follow the official [Docker installation guide](https://docs.docker.com/engine/install/).
@@ -139,12 +135,11 @@ All scripts take a profile as argument (cpu, nvidia or amd).
 If you prefer using **PyCharm** instead of the browser-based Jupyter interface,
 follow the detailed setup guide here:
 
-👉 [View PyCharm Setup Guide](docs/pycharm_setup.md) in this repository. 
+→ View [PyCharm Setup Guide](docs/pycharm_setup.md) in this repository. 
 
 ![PyCharm Icon](docs/images/pycharm_icon.png)
 
-
-## ⚙️ Environment Configuration
+## Environment Configuration
 
 You can customize environment variables in a `.env` file at the project root.
 
@@ -157,7 +152,7 @@ JUPYTER_PORT_TORCH=8889
 
 You can override these values as needed, for example to change exposed ports or image names.
 
-### 🔒 Security (Jupyter Token)
+### Security (Jupyter Token)
 
 By default, Jupyter runs without a token for local development.
 If you want to protect your server, set a token via `.env`:
@@ -166,8 +161,7 @@ If you want to protect your server, set a token via `.env`:
 JUPYTER_TOKEN=your-secure-token
 ```
 
-
-## 🧩 GPU Setup
+## GPU Setup
 
 > **Note:** If GPU setup becomes too time-consuming or fails after multiple attempts, simply use the CPU containers — they work out of the box on all systems.
 
@@ -194,8 +188,7 @@ You can check your local CUDA version with:
 For AMD GPUs, follow the [ROCm Docker quick start guide](https://github.com/ROCm/ROCm-docker/blob/master/quick-start.md).  
 This is only supported on **Linux** (Windows users should use the CPU version).
 
-
-## 🧰 Local Setup (Optional)
+## Local Setup (Optional)
 
 If you prefer running notebooks locally (not recommended for reproducibility), install dependencies with:
 
@@ -205,8 +198,7 @@ pip install -r requirements.txt
 
 > Some features (e.g., GPU detection) may not work outside Docker.
 
-
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 - **NVIDIA GPU not visible in container**  
   Check host: `nvidia-smi`. Then test container:  
@@ -222,14 +214,12 @@ pip install -r requirements.txt
     JUPYTER_PORT_TORCH=18889
   ```
 
-
-## 🧑‍💻 Contributing
+## Contributing
 
 Contributions, ideas, or suggestions are very welcome!  
 Please feel free to open issues or pull requests on GitHub.
 
-
-## 🪪 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).  
 © 2025 Jonathan Wekesser
