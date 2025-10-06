@@ -148,3 +148,6 @@ notebook/templates/*.html
 
 # PyCharm
 .idea
+
+# Environment
+.env
