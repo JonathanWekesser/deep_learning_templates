@@ -1,0 +1,20 @@
+{
+  "name": "DL Templates (Torch on CPU)",
+  "dockerComposeFile": ["${localWorkspaceFolder}/docker-compose.yaml"],
+  "service": "torch-cpu",
+  "runServices": ["torch-cpu"],
+  "workspaceFolder": "/workspace",
+  "updateRemoteUserUID": true,
+  "shutdownAction": "none",
+  "overrideCommand": false,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
