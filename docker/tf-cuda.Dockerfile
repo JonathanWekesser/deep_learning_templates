@@ -10,9 +10,8 @@ RUN python -m pip install --upgrade pip setuptools wheel && pip install \
     jupyter jupyterlab tqdm \
     numpy pandas matplotlib scikit-learn \
     transformers huggingface-hub datasets tokenizers sentencepiece evaluate \
-    tensorflow_datasets \
-    keras --no-deps \
-    keras-nlp --no-deps
+    tensorflow_datasets && \
+    RUN pip install keras keras-nlp --no-deps
     
 ENV JUPYTER_TOKEN=""
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token="${JUPYTER_TOKEN}"
